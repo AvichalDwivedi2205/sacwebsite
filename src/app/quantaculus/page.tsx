@@ -20,6 +20,13 @@ const Page = () => {
     "https://images.unsplash.com/photo-1735436094299-ac250a63b379?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     "https://plus.unsplash.com/premium_photo-1732721750556-f5aef2460dfd?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   ];
+
+  // Update this line to provide both src and link properties
+  const imageItems = images.map(src => ({ 
+    src, 
+    link: "#" // You can replace this with actual links if available
+  }));
+
   const yearData = {
     2025: {
       title: "2025 and Beyond",
@@ -71,7 +78,7 @@ const Page = () => {
                 </CardDescription>
               </CardHeader>
               <CardContent className="p-2 sm:p-4">
-                <ImageCarousel images={images} autoPlayInterval={5000} />
+                <ImageCarousel images={imageItems} autoPlayInterval={5000} />
               </CardContent>
             </Card>
           </TabsContent>

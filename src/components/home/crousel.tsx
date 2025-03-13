@@ -15,7 +15,7 @@ import Link from "next/link";
 
 interface ImageItem {
   src: string;
-  link: string;
+  link?: string | { pathname: string; query?: Record<string, string> };
 }
 
 interface CarouselProps {
@@ -82,17 +82,29 @@ const ImageCarousel: React.FC<CarouselProps> = ({
           {images.map((image, index) => (
             <CarouselItem key={index} className="md:basis-full">
               <Card className="relative w-full h-[70vh] overflow-hidden">
-                <Link href={image.link} passHref>
+                {typeof image.link === 'string' || typeof image.link === 'object' ? (
+                  <Link href={image.link}>
+                    <Image
+                      src={image.src || ""}
+                      alt={`Slide ${index + 1}`}
+                      fill
+                      priority={index === 0}
+                      className="transition-transform duration-500 hover:scale-105 object-contain cursor-pointer"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 70vw"
+                      quality={90}
+                    />
+                  </Link>
+                ) : (
                   <Image
-                    src={image.src}
+                    src={image.src || ""}
                     alt={`Slide ${index + 1}`}
                     fill
                     priority={index === 0}
-                    className="transition-transform duration-500 hover:scale-105 object-contain cursor-pointer"
+                    className="transition-transform duration-500 hover:scale-105 object-contain"
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 70vw"
                     quality={90}
                   />
-                </Link>
+                )}
               </Card>
             </CarouselItem>
           ))}
