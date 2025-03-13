@@ -1,18 +1,20 @@
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { Separator } from "@/components/ui/separator";
 import ImageCarousel from "@/components/home/crousel";
 
 const Home = () => {
   const ResourceImage = [
-    "/production/resources/r1.jpg",
-    "/production/resources/r2.png",
-    "/production/resources/r3.png"
-  ]
+    { src: "/production/resources/r1.jpg", link: "/resources" },
+    { src: "/production/resources/r2.png", link: "/resources" },
+    { src: "/production/resources/r3.png", link: "/resources" }
+  ];
+  
   const EventsImage = [
-    "/production/events/e1.jpg",
-    "/production/events/e2.jpg",
-    "/production/events/enew.jpg"
+    {src: "/production/events/e1.jpg", link: "/events"},
+    {src: "/production/events/e2.jpg", link: "/events"},
+    {src: "/production/events/enew.jpg", link: "/events"}
   ]
   // const finalImages = [
   //   // `https://www.instagram.com/p/DEtr6QjJD0B/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==`
@@ -50,8 +52,13 @@ const Home = () => {
           </div>
           <ImageCarousel images={EventsImage} autoPlayInterval={5000} />
           <div className="text-4xl font-bold text-center py-5 underline">
-            Blogs
+            <Link href="/blogs" passHref>
+              <span className="cursor-pointer hover:text-blue-600 transition-colors duration-200">
+                Blogs
+              </span>
+            </Link>
           </div>
+
           {/* <ImageCarousel images={finalImages} autoPlayInterval={5000} /> */}
         </div>
       </div>
