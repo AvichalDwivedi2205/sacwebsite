@@ -1,12 +1,12 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { formSchemaType } from "@/lib/schemas/contact-form-schema";
 import { formSchema } from "@/lib/schemas/contact-form-schema";
-
+import emailjs from '@emailjs/browser';
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -17,8 +17,12 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { toast } from "sonner";
+import { Loader2 } from "lucide-react";
 
 const ContactUsForm = () => {
+  const [isLoading, setIsLoading] = useState(false);
+  
   const form = useForm<formSchemaType>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -28,9 +32,33 @@ const ContactUsForm = () => {
     },
   });
 
-  const onSubmitForm = () => {
-
+  const onSubmitForm = async (data: formSchemaType) => {
+    try {
+      setIsLoading(true);
+      
+      const templateParams = {
+        username: data.username,
+        email: data.email,
+        message: data.queries,
+      };
+      
+      await emailjs.send(
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
+        templateParams,
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
+      );
+      
+      toast.success("Message sent successfully!");
+      form.reset();
+    } catch (error) {
+      console.error("Error sending email:", error);
+      toast.error("Failed to send message. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
   };
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmitForm)} className="space-y-8">
@@ -58,9 +86,9 @@ const ContactUsForm = () => {
                       className="bg-white text-black py-3"
                       placeholder="Enter Your name here"
                       {...field}
+                      disabled={isLoading}
                     />
                   </FormControl>
-
                   <FormMessage />
                 </FormItem>
               )}
@@ -78,9 +106,9 @@ const ContactUsForm = () => {
                       className="bg-white text-black py-3"
                       placeholder="Enter Your Email here"
                       {...field}
+                      disabled={isLoading}
                     />
                   </FormControl>
-
                   <FormMessage />
                 </FormItem>
               )}
@@ -96,9 +124,9 @@ const ContactUsForm = () => {
                       className="bg-white text-black h-16"
                       placeholder="Enter Your Queries here"
                       {...field}
+                      disabled={isLoading}
                     />
                   </FormControl>
-
                   <FormMessage />
                 </FormItem>
               )}
@@ -107,8 +135,16 @@ const ContactUsForm = () => {
             <Button
               type="submit"
               className="w-fit mx-auto bg-[#ffedb8] text-black font-semibold"
+              disabled={isLoading}
             >
-              Save
+              {isLoading ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  Sending...
+                </>
+              ) : (
+                "Send Message"
+              )}
             </Button>
           </CardContent>
         </Card>

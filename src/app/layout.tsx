@@ -3,10 +3,13 @@ import "./globals.css";
 import { Inter } from 'next/font/google'
 import { cn } from "@/lib/utils";
 import Footer from "@/components/Footer";
+import { Toaster } from 'sonner';
+
 const inter = Inter({
   subsets: ["latin"], // Choose subsets based on your needs
   // Optional custom variable
 });
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -19,6 +22,7 @@ export default function RootLayout({
       >
         <Navbar />
         {children}
+        <Toaster position="top-center" richColors />
         <Footer />
 
       </body>
