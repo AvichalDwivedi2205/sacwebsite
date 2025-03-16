@@ -6,9 +6,9 @@ import ImageCarousel from "@/components/home/crousel";
 
 const Home = () => {
   const ResourceImage = [
-    { src: "/production/resources/r1.jpg", link: "/resources" },
-    { src: "/production/resources/r2.png", link: "/resources" },
-    { src: "/production/resources/r3.png", link: "/resources" }
+    { src: "/production/resources/r1.jpg", link: "/resources/101" },
+    { src: "/production/resources/r2.png", link: "/resources/102" },
+    { src: "/production/resources/r3.png", link: "/resources/103" }
   ];
   
   const EventsImage = [
