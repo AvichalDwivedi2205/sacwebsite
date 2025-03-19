@@ -27,13 +27,17 @@ const Page = () => {
 
   // Specific images for each year
   const images2025 = [
-    convertGoogleDriveUrl("https://drive.google.com/file/d/1zHTD3hzoDp-Ffe42xpa2kR0btQ2GpjMH/view?usp=sharing")
+    convertGoogleDriveUrl("https://drive.google.com/file/d/1zHTD3hzoDp-Ffe42xpa2kR0btQ2GpjMH/view?usp=sharing"),
+    convertGoogleDriveUrl("https://drive.google.com/file/d/1TeXzZQgOE2w-CKK_qpyYcBDEP-n2iJjF/view?usp=sharing"),
+    convertGoogleDriveUrl("https://drive.google.com/file/d/1_2Vu7lsjoWikdyBdVtRCDdrz9WDjcz42/view?usp=sharing"),
   ];
 
   const images2024 = [
     convertGoogleDriveUrl("https://drive.google.com/file/d/1mYer61t8Lpdg7800Tl9PSunITXZTPI35/view?usp=sharing"),
     convertGoogleDriveUrl("https://drive.google.com/file/d/1R9daI1Ns2_T3jY8SITF0397ZuQpXtpOu/view?usp=sharing"),
-    convertGoogleDriveUrl("https://drive.google.com/file/d/1_wEpcI_bzIqpHtfnnFDHvBQzDR7jVvX_/view?usp=sharing")
+    convertGoogleDriveUrl("https://drive.google.com/file/d/1_wEpcI_bzIqpHtfnnFDHvBQzDR7jVvX_/view?usp=sharing"),
+    convertGoogleDriveUrl("https://drive.google.com/file/d/19pDYBI0tQutjNQiKwXxzXpeMLCfhZoVG/view?usp=sharing"),
+    convertGoogleDriveUrl("https://drive.google.com/file/d/1iKM9461X0UC0ulGIq-JcSw1uwxQuud-h/view?usp=sharing"),
   ];
 
   // Convert to format needed by ImageCarousel
